@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BACCARAT</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- ===== 上部バー：シューの残り・所持金・設定 ===== -->
+    <header class="topbar">
+        <div class="topbar-left">
+            <span class="label">SHOE</span>
+            <span class="value" id="shoeRemaining">416</span>
+            <span class="unit">cards</span>
+        </div>
+
+        <div class="topbar-center">
+            <span class="brand">BACCARAT</span>
+        </div>
+
+        <div class="topbar-right">
+            <label class="toggle">
+                <input type="checkbox" id="commissionToggle" checked>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                <span class="toggle-label" id="commissionLabel">COMMISSION</span>
+            </label>
+            <span class="label">BALANCE</span>
+            <span class="value balance" id="balance">100,000</span>
+        </div>
+    </header>
+
+    <main class="table">
+        <!-- ===== 罫線 ===== -->
+        <section class="roads">
+            <div class="road-block">
+                <div class="road-head"><span>大路</span><span class="road-en">BIG ROAD</span></div>
+                <div class="road-scroll"><canvas id="bigRoad" height="132"></canvas></div>
+            </div>
+            <div class="derived">
+                <div class="road-block">
+                    <div class="road-head"><span>大眼仔</span><span class="road-en">BIG EYE</span></div>
+                    <div class="road-scroll"><canvas id="bigEye"></canvas></div>
+                </div>
+                <div class="road-block">
+                    <div class="road-head"><span>小路</span><span class="road-en">SMALL</span></div>
+                    <div class="road-scroll"><canvas id="smallRoad"></canvas></div>
+                </div>
+                <div class="road-block">
+                    <div class="road-head"><span>甲由路</span><span class="road-en">COCKROACH</span></div>
+                    <div class="road-scroll"><canvas id="cockroach"></canvas></div>
+                </div>
+            </div>
+            <div class="stats" id="stats"></div>
+        </section>
+
+        <!-- ===== カード場 ===== -->
+        <section class="felt">
+            <div class="side player-side">
+                <div class="side-head">
+                    <span class="side-name">PLAYER</span>
+                    <span class="side-total" id="playerTotal">—</span>
+                </div>
+                <div class="cards" id="playerCards"></div>
+            </div>
+
+            <div class="versus" id="versus"></div>
+
+            <div class="side banker-side">
+                <div class="side-head">
+                    <span class="side-name">BANKER</span>
+                    <span class="side-total" id="bankerTotal">—</span>
+                </div>
+                <div class="cards" id="bankerCards"></div>
+            </div>
+        </section>
+
+        <!-- ===== 結果表示 ===== -->
+        <div class="result-bar" id="resultBar"></div>
+
+        <!-- ===== ベットエリア ===== -->
+        <section class="bet-area">
+            <div class="bet-row pairs">
+                <button class="bet-spot pair" data-spot="pPair">
+                    <span class="spot-name">P PAIR</span>
+                    <span class="spot-odds">11:1</span>
+                    <span class="spot-chips" id="chips-pPair"></span>
+                </button>
+                <button class="bet-spot tie" data-spot="tie">
+                    <span class="spot-name">TIE</span>
+                    <span class="spot-odds">8:1</span>
+                    <span class="spot-chips" id="chips-tie"></span>
+                </button>
+                <button class="bet-spot pair" data-spot="bPair">
+                    <span class="spot-name">B PAIR</span>
+                    <span class="spot-odds">11:1</span>
+                    <span class="spot-chips" id="chips-bPair"></span>
+                </button>
+            </div>
+            <div class="bet-row mains">
+                <button class="bet-spot main player" data-spot="player">
+                    <span class="spot-name">PLAYER</span>
+                    <span class="spot-odds">1:1</span>
+                    <span class="spot-chips" id="chips-player"></span>
+                </button>
+                <button class="bet-spot main banker" data-spot="banker">
+                    <span class="spot-name">BANKER</span>
+                    <span class="spot-odds" id="bankerOdds">1:1 −5%</span>
+                    <span class="spot-chips" id="chips-banker"></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== チップと操作 ===== -->
+        <section class="controls">
+            <div class="chip-rack" id="chipRack"></div>
+            <div class="buttons">
+                <button class="btn ghost" id="clearBtn">CLEAR</button>
+                <button class="btn ghost" id="rebetBtn">REBET</button>
+                <button class="btn deal" id="dealBtn">DEAL</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== シュー終了のお知らせ ===== -->
+    <div class="overlay" id="shuffleOverlay">
+        <div class="overlay-box">
+            <p class="overlay-title">SHUFFLE</p>
+            <p class="overlay-text">カットカードが出ました。<br>新しいシューに交換します。</p>
+            <button class="btn deal" id="newShoeBtn">新しいシューで続ける</button>
+        </div>
+    </div>
+
+    <script src="engine.js"></script>
+    <script src="ui.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
